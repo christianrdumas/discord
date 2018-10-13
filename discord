@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+
+import discord
+from temp import produce_image
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('Connected!')
+    print('Username: ' + client.user.name)
+    print('ID: ' + client.user.id)
+
+@client.event
+async def on_message(message):
+# we do not want the bot to reply to itself
+    print(message.author)
+    if str(message.author) != "Arcturox#9495" and str(message.author) != "Typhace#7974" and str(message.author) != "ursinewalrus#0163":
+        return
+    await client.delete_message ( message )
+    produce_image ( message.content )
+    await client.send_file(message.channel, '/home/pi/Documents/out_img.png')
+
+client.run(str(open('/home/pi/Documents/token_file').read()).rstrip('\n'))
