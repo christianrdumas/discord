@@ -28,6 +28,7 @@ def print_char(array, x, y, char_to_print, scale):
 
  
 def produce_image(input_text):
+    input_text = "".join(x for x in input_text if x.isalpha())
     input_text = input_text.upper()
     input_text = input_text[:11]
     r=png.Reader(filename='/home/pi/Documents/img.png')

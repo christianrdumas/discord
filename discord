@@ -15,7 +15,9 @@ async def on_ready():
 async def on_message(message):
 # we do not want the bot to reply to itself
     print(message.author)
-    if str(message.author) != "Arcturox#9495" and str(message.author) != "Typhace#7974" and str(message.author) != "ursinewalrus#0163":
+    if message.author == client.user:
+        return
+    if message.content[0] != '$':
         return
     await client.delete_message ( message )
     produce_image ( message.content )
