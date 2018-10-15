@@ -11,6 +11,8 @@ async def on_ready():
     print('Username: ' + client.user.name)
     print('ID: ' + client.user.id)
 
+allowed_chars = ['$', '^', ')']
+
 @client.event
 async def on_message(message):
 # we do not want the bot to reply to itself
@@ -19,10 +21,16 @@ async def on_message(message):
         return
     if message.author == client.user:
         return
-    if message.content[0] != '$':
+    if message.content[0] not in allowed_chars:
         return
+    if message.content[0] == '$':
+        name = 'nepeta'
+    if message.content[0] == '^':
+        name = 'vriska'
+    if message.content[0] == ')':
+        name = 'karkat'
     await client.delete_message ( message )
-    produce_image ( message.content )
+    produce_image ( message.content, name )
     await client.send_file(message.channel, '/home/pi/Documents/out_img.png')
 
 client.run(str(open('/home/pi/Documents/token_file').read()).rstrip('\n'))
