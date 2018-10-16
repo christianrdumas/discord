@@ -4,7 +4,10 @@ import json
 
 green_rgb = [63, 101, 5]
 
-troll_colors = {'nepeta':[63, 101, 5],'vriska':[0, 64, 128],'karkat':[108, 108, 108]}
+troll_colors = {'nepeta':[63, 101, 5],
+                'vriska':[0, 64, 128],
+                'karkat':[108, 108, 108],
+                'equius':[0, 32, 203]}
 
        
 conv_list = []
@@ -23,6 +26,7 @@ for a in conv_list:
 for a in range(len(bit_list)):
     bit_dict[chr(a+ord('A'))] = bit_list[a]
 
+bit_dict['O'] = '111101101101111'
 bit_dict[':'] = '000010000010000'
 bit_dict['3'] = '110001010001110'
 bit_dict['<'] = '001010100010001'

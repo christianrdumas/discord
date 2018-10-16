@@ -11,7 +11,7 @@ async def on_ready():
     print('Username: ' + client.user.name)
     print('ID: ' + client.user.id)
 
-allowed_chars = ['$', '^', ')']
+name_list = ['nepeta', 'vriska', 'equius', 'karkat']
 
 @client.event
 async def on_message(message):
@@ -19,18 +19,16 @@ async def on_message(message):
     print(message.author)
     if str(message.channel) != "bot-channel":
         return
+    name = str(message.content).split(' ')[0].lstrip('$')
+    remainder = str(message.content).lstrip('$'+name)
     if message.author == client.user:
         return
-    if message.content[0] not in allowed_chars:
+    if message.content[0] != '$':
         return
-    if message.content[0] == '$':
-        name = 'nepeta'
-    if message.content[0] == '^':
-        name = 'vriska'
-    if message.content[0] == ')':
-        name = 'karkat'
+    if name not in name_list:
+        return
     await client.delete_message ( message )
-    produce_image ( message.content, name )
+    produce_image ( remainder, name )
     await client.send_file(message.channel, '/home/pi/Documents/out_img.png')
 
 client.run(str(open('/home/pi/Documents/token_file').read()).rstrip('\n'))
